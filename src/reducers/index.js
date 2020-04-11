@@ -33,9 +33,22 @@ export default function carFeatureReducer(state = initialState, action) {
         additionalPrice: state.additionalPrice + addedFeature.price,
       };
     case ACTIONS.REMOVE_FEATURE:
-      return state;
+      const featureToRemove = state.additionalFeatures.find(
+        (x) => x.id === action.payload
+      );
+      if (!state.car.features.includes(featureToRemove)) return state;
+      return {
+        ...state,
+        car: {
+          ...state.car,
+          features: [
+            ...state.car.features.filter((x) => x.id !== action.payload),
+          ],
+        },
+        additionalPrice: state.additionalPrice - featureToRemove.price,
+      };
     case ACTIONS.BUY_CAR:
-      return state;
+      return initialState;
     default:
       return state;
   }
