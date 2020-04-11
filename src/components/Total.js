@@ -1,5 +1,8 @@
 import React from "react";
 
+import { buyCar } from "../actions";
+import { connect } from "react-redux";
+
 function generateCarString(car) {
   return `Congrats on your new ${car.name}${
     car.features.length === 0
@@ -15,7 +18,7 @@ function generateCarString(car) {
   }`;
 }
 
-const Total = (props) => {
+function Total(props) {
   return (
     <div className="content">
       <h4>Total Amount: ${props.car.price + props.additionalPrice}</h4>
@@ -30,6 +33,14 @@ const Total = (props) => {
       </button>
     </div>
   );
-};
+}
 
-export default Total;
+export default connect(
+  ({ car, additionalPrice }) => {
+    return {
+      car,
+      additionalPrice,
+    };
+  },
+  { buyCar }
+)(Total);

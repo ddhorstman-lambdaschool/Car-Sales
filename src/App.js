@@ -7,32 +7,22 @@ import Total from "./components/Total";
 
 import { connect } from "react-redux";
 
-import { buyCar } from "./actions";
-
 const App = (props) => {
-
   return (
     <div className="boxes">
       <div className="box">
         <Header car={props.car} />
-        <AddedFeatures car={props.car} />
+        <AddedFeatures />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={props.additionalFeatures} />
-        <Total
-          buyCar={props.buyCar}
-          car={props.car}
-          additionalPrice={props.additionalPrice}
-        />
+        <AdditionalFeatures />
+        <Total />
       </div>
     </div>
   );
 };
 
-export default connect(
-  (state) => {
-    //map all properties of state to a prop of the same name
-    return { ...state };
-  },
-  { buyCar }
-)(App);
+export default connect((state) => {
+  //map all properties of state to a prop of the same name
+  return { ...state };
+})(App);
