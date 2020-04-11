@@ -31,5 +31,6 @@ const App = (props) => {
 };
 
 export default connect((state) => {
+  //map all properties of state to a prop of the same name
   return { ...state };
 }, {})(App);
