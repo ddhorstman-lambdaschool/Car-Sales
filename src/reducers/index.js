@@ -20,9 +20,8 @@ const initialState = {
 export default function carFeatureReducer(state = initialState, action) {
   switch (action.type) {
     case ACTIONS.ADD_FEATURE:
-      const addedFeature = state.additionalFeatures.find(
-        (x) => x.id === action.payload
-      );
+      const addedFeature = state.additionalFeatures.find(x => x.id === action.payload);
+      //do nothing if the feature has already been added
       if (state.car.features.includes(addedFeature)) return state;
       return {
         ...state,
@@ -31,21 +30,25 @@ export default function carFeatureReducer(state = initialState, action) {
           features: [...state.car.features, addedFeature],
         },
         additionalPrice: state.additionalPrice + addedFeature.price,
+        additionalFeatures: state.additionalFeatures.filter(x=> x.id !== action.payload),
       };
     case ACTIONS.REMOVE_FEATURE:
-      const featureToRemove = state.additionalFeatures.find(
-        (x) => x.id === action.payload
-      );
+      const featureToRemove = state.car.features.find(x => x.id === action.payload);
+      //do nothing if the feature has never been added
       if (!state.car.features.includes(featureToRemove)) return state;
       return {
         ...state,
         car: {
           ...state.car,
           features: [
-            ...state.car.features.filter((x) => x.id !== action.payload),
+            ...state.car.features.filter(x => x.id !== action.payload),
           ],
         },
         additionalPrice: state.additionalPrice - featureToRemove.price,
+        additionalFeatures: [
+          ...state.additionalFeatures,
+          featureToRemove
+        ],
       };
     case ACTIONS.BUY_CAR:
       return initialState;

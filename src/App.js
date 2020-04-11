@@ -7,14 +7,9 @@ import Total from "./components/Total";
 
 import { connect } from "react-redux";
 
-const App = (props) => {
-  const removeFeature = (item) => {
-    // dispatch an action here to remove an item
-  };
+import { buyCar } from "./actions";
 
-  const buyItem = (item) => {
-    // dipsatch an action here to add an item
-  };
+const App = (props) => {
 
   return (
     <div className="boxes">
@@ -24,13 +19,20 @@ const App = (props) => {
       </div>
       <div className="box">
         <AdditionalFeatures additionalFeatures={props.additionalFeatures} />
-        <Total car={props.car} additionalPrice={props.additionalPrice} />
+        <Total
+          buyCar={props.buyCar}
+          car={props.car}
+          additionalPrice={props.additionalPrice}
+        />
       </div>
     </div>
   );
 };
 
-export default connect((state) => {
-  //map all properties of state to a prop of the same name
-  return { ...state };
-}, {})(App);
+export default connect(
+  (state) => {
+    //map all properties of state to a prop of the same name
+    return { ...state };
+  },
+  { buyCar }
+)(App);

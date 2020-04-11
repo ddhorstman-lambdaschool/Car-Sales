@@ -1,7 +1,19 @@
 import React from "react";
 
-import { buyCar } from "../actions";
-import { connect } from "react-redux";
+function generateCarString(car) {
+  return `Congrats on your new ${car.name}${
+    car.features.length === 0
+      ? "!"
+      : car.features.length === 1
+      ? " with " + car.features[0].name + "!"
+      : " with" +
+        car.features.map(
+          (feature, i, features) =>
+            (i + 1 === features.length ? " and " : " ") + feature.name
+        ) +
+        "!"
+  }`;
+}
 
 const Total = (props) => {
   return (
@@ -10,21 +22,7 @@ const Total = (props) => {
       <button
         className="button"
         onClick={() => {
-          console.log(props.car.features);
-          alert(
-            `Congrats on your new ${props.car.name}${
-              props.car.features.length === 0
-                ? "!"
-                : props.car.features.length === 1
-                ? " with " + props.car.features[0].name + "!"
-                : " with" +
-                  props.car.features.map(
-                    (feature, i, features) =>
-                      (i + 1 === features.length ? " and " : " ") + feature.name
-                  ) +
-                  "!"
-            }`
-          );
+          alert(generateCarString(props.car));
           props.buyCar();
         }}
       >
@@ -34,9 +32,4 @@ const Total = (props) => {
   );
 };
 
-export default connect(
-  () => {
-    return {};
-  },
-  { buyCar }
-)(Total);
+export default Total;
