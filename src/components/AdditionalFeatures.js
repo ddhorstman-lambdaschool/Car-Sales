@@ -1,14 +1,22 @@
-import React from 'react';
-import AdditionalFeature from './AdditionalFeature';
+import React from "react";
+import AdditionalFeature from "./AdditionalFeature";
 
-const AdditionalFeatures = props => {
+import { connect } from "react-redux";
+import { addFeature } from "../actions";
+
+function AdditionalFeatures(props) {
   return (
     <div className="content">
       <h4>Additional Features</h4>
       {props.additionalFeatures.length ? (
         <ol type="1">
-          {props.additionalFeatures.map(item => (
-            <AdditionalFeature key={item.id} feature={item} />
+          {props.additionalFeatures.map((item) => (
+            <AdditionalFeature
+              key={item.id}
+              {...item}
+              //careful to use the version from props and not the original!
+              addFeature={props.addFeature}
+            />
           ))}
         </ol>
       ) : (
@@ -16,6 +24,11 @@ const AdditionalFeatures = props => {
       )}
     </div>
   );
-};
+}
 
-export default AdditionalFeatures;
+export default connect(
+  ({ additionalFeatures }) => {
+    return { additionalFeatures };
+  },
+  { addFeature }
+)(AdditionalFeatures);

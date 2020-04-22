@@ -55,6 +55,14 @@ Follow these steps for completing your project.
 - Write out the steps you think you'll need to complete this project. It seems silly, but doing this with every project will help you grow into a better developer a lot faster.
 - Take note of the few comments throughout the app. They are there as little guides to nudge you in the right direction. You're welcome 😉
 
+1. Install redux and react-redux
+2. Set up blank actions and reducers
+3. Implement the add feature buttons
+4. Implement calculating price based on added features
+5. Implement removing features
+6. Implement "purchase"
+7. Add additional optional features?
+
 **Step 2 - And... Action! 🎬**
 
 - Time to get your hands on your keyboard. Look at the first step you wrote down and start implementing!

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const Header = props => {
+export default function Header(props) {
   return (
     <>
       <figure className="image is-128x128">
@@ -10,6 +10,4 @@ const Header = props => {
       <p>Amount: ${props.car.price}</p>
     </>
   );
-};
-
-export default Header;
+}

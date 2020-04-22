@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const AddedFeature = props => {
+export default function AddedFeature(props) {
   return (
     <li>
-      {/* Add an onClick to run a function to remove a feature */}
-      <button className="button">X</button>
-      {props.feature.name}
+      <button onClick={() => props.removeFeature(props.id)} className="button">
+        X
+      </button>
+      {props.name}
     </li>
   );
-};
-
-export default AddedFeature;
+}
